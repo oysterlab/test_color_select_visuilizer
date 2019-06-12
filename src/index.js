@@ -15,7 +15,7 @@ camera.position.z = 200;
 
 const colorParticles = new ColorPaticles(renderer, {
   rowCount: Math.pow(2, 4), 
-  particleWidth: 3, 
+  particleWidth: 5, 
   cubeWidth: 80, 
   isRandomPosition: false
 })

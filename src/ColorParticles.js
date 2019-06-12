@@ -84,15 +84,15 @@ class ColorParticles {
             toPosTexture.image.data[i + 3] = initPosTexture.image.data[i + 3]
 
             const { r, g, b } = HSVtoRGB(xi, 1.0 - yi, zi)
-            colorMapTexture.image.data[i + 0] = r
-            colorMapTexture.image.data[i + 1] = g
-            colorMapTexture.image.data[i + 2] = b
-            colorMapTexture.image.data[i + 3] = 1
-
-            // colorMapTexture.image.data[i + 0] = xi
-            // colorMapTexture.image.data[i + 1] = yi
-            // colorMapTexture.image.data[i + 2] = zi
+            // colorMapTexture.image.data[i + 0] = r
+            // colorMapTexture.image.data[i + 1] = g
+            // colorMapTexture.image.data[i + 2] = b
             // colorMapTexture.image.data[i + 3] = 1
+
+            colorMapTexture.image.data[i + 0] = xi
+            colorMapTexture.image.data[i + 1] = yi
+            colorMapTexture.image.data[i + 2] = zi
+            colorMapTexture.image.data[i + 3] = 1
 
 
             colors.push([r, g, b])
@@ -237,22 +237,22 @@ class ColorParticles {
 
                 for (let i = 0; i < wy.length; i++) {
                     const { idx, yi, v } = wy[i]
-                    let y_ = -particleInterval * i
+                    let y_ = -particleInterval * (wy.length - i)
                     if(isRandomPosition) {
-                        y_ += particleInterval * Math.random()
+                        y_ += particleInterval * (Math.random() - 0.5) * 0.5
                     }
-                    toPosTexture.image.data[idx * 4 + 1] = y_ + cubeWidth - particleInterval
-                    toPosTexture.image.data[idx * 4 + 2] = initPosTexture.image.data[idx * 4 + 2] - cubeWidth
+                    toPosTexture.image.data[idx * 4 + 1] = y_
+                    // toPosTexture.image.data[idx * 4 + 2] = initPosTexture.image.data[idx * 4 + 2] + cubeWidth
                  }
 
                 for (let i = 0; i < by.length; i++) {
                     const { idx, yi, v } = by[i]
-                    let y_ = particleInterval * i
+                    let y_ = particleInterval  * i
                     if(isRandomPosition) {
-                        y_ += particleInterval * Math.random()
+                        y_ += particleInterval * (Math.random() - 0.5) * 0.5
                     }
-                    toPosTexture.image.data[idx * 4 + 1] = y_
-                    toPosTexture.image.data[idx * 4 + 2] = initPosTexture.image.data[idx * 4 + 2]
+                    toPosTexture.image.data[idx * 4 + 1] = y_ + particleInterval
+                    // toPosTexture.image.data[idx * 4 + 2] = initPosTexture.image.data[idx * 4 + 2]
                 }
             }
         }
